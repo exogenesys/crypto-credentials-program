@@ -3,6 +3,22 @@ use anchor_lang::prelude::*;
 #[program]
 pub mod crypto_credentials_program {
     use super::*;
+
+    pub fn create_university(
+        ctx: Context<CreateUniversity>,
+        name: String,
+        number: u64,
+        bump: u8,
+    ) -> ProgramResult {
+        let university = &mut ctx.accounts.university;
+        university.name = name;
+        university.number = number;
+        university.authority = *ctx.accounts.authority.to_account_info().key;
+        university.bump = bump;
+        Ok(())
+    }
+
+
     pub fn create_college(
         ctx: Context<CreateCollege>,
         board_name: Option<String>,
@@ -66,7 +82,6 @@ pub mod crypto_credentials_program {
     }
 }
 
-// Define the validated accounts for each handler.
 #[derive(Accounts)]
 pub struct CreateCollege<'info> {
     #[account(init)]
@@ -74,6 +89,22 @@ pub struct CreateCollege<'info> {
     #[account(mut, signer)]
     authority: AccountInfo<'info>,
     rent: Sysvar<'info, Rent>,
+    system_program: AccountInfo<'info>,
+}
+
+#[derive(Accounts)]
+#[instruction(name: String, number: u64, bump: u8)]
+pub struct CreateUniversity<'info> {
+    #[account(
+        init,
+        seeds = [authority.to_account_info().key.as_ref(), &number.to_be_bytes()],
+        bump = bump,
+        payer = authority,
+        space = 320,
+    )]
+    university: ProgramAccount<'info, University>,
+    #[account(mut, signer)]
+    authority: AccountInfo<'info>,
     system_program: AccountInfo<'info>,
 }
 
@@ -150,6 +181,14 @@ pub struct UpdateCredential<'info> {
 }
 
 // Define the program owned accounts.
+#[account]
+pub struct University {
+    name: String,
+    number: u64,
+    authority: Pubkey,
+    bump: u8,
+}
+
 #[account]
 pub struct College {
     name: Option<String>,
