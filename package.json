@@ -10,6 +10,8 @@
     "@project-serum/anchor": "^0.14.0"
   },
   "scripts": {
-    "start": "node app/index.js"
+    "start": "node app/index.js",
+    "new": "anchor build && anchor deploy && echo \"\nupdate program id\"",
+    "update": "anchor build && anchor upgrade ./target/deploy/crypto_credentials_program.so --program-id FLwhtsbCXyxfFHSNVsgjpdopykkR682DbwoAty3N8GY8"
   }
 }
