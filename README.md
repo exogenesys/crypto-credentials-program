@@ -1,5 +1,7 @@
 # On-Chain Program for CryptoCredentials
 
+For client app to interact: https://github.com/exogenesys/crypto-credentials
+
 As we increasingly learn different things in our careers, it can be difficult for our online profile to reflect those achievements. Educators who give out credentials to their students, do it in the form of paper or, at most, on PDF.
 
 The problem with on-paper/PDF credentials are as following:
