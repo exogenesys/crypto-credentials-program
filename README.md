@@ -4,10 +4,10 @@ As we increasingly learn different things in our careers, it can be difficult fo
 
 The problem with on-paper/PDF credentials are as following:
 
-    They can only be understood by humans
-    They can easily be faked and counterfieted
-    There is no de-facto standard to represent a credential accross the organisations and accross different countries
-    They can be lost
+- They can only be understood by humans
+- They can easily be faked and counterfieted
+- There is no de-facto standard to represent a credential accross the organisations and accross different countries
+- They can be lost
 
 Welcome, CryptoCredentials!
 
